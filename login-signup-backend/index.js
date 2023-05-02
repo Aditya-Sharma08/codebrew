@@ -60,6 +60,6 @@ app.post("/signup", (req, res) => {
   });
 });
 
-app.listen(9002, () => {
+app.listen(process.env.PORT || 9002, () => {
   console.log("BE started at port 9002");
 });
