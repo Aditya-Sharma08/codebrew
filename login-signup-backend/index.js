@@ -4,16 +4,19 @@ const mongoose = require("mongoose");
 
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded());
+express.urlencoded({ extended: true });
 app.use(cors());
 
-mongoose.connect(
-  "mongodb+srv://adi:aditya@cluster0.luvw69t.mongodb.net/loginsignup",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose
+  .connect(
+    "mongodb+srv://adi:aditya@cluster0.luvw69t.mongodb.net/loginsignup",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .then(() => console.log("Connection Successful!"))
+  .catch((err) => console.log(err));
 
 const userSchema = new mongoose.Schema({
   name: String,
