@@ -1,23 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Home from "./components/editorpage/Home";
+import Login from "./components/login/Login";
+import Signup from "./components/signup/Signup";
+import { Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import DataProvider from "./context/DataProvider";
+import Loader from "./components/Loader";
+import loadinghome from "./animations/loadinghome.json";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(function () {
+    setTimeout(function () {
+      setLoading(false);
+    }, 3000);
+  }, []);
+
+  const [user, setLoginUser] = useState({});
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {loading === true ? (
+        <Loader animation={loadinghome} />
+      ) : (
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              user && user._id ? (
+                <DataProvider>
+                  <Home setLoginUser={setLoginUser} />
+                </DataProvider>
+              ) : (
+                <Login setLoginUser={setLoginUser} />
+              )
+            }
+          />
+          <Route
+            path="/login"
+            element={<Login setLoginUser={setLoginUser} />}
+          />
+          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/home"
+            element={
+              <DataProvider>
+                <Home />
+              </DataProvider>
+            }
+          />
+        </Routes>
+      )}
     </div>
   );
 }
