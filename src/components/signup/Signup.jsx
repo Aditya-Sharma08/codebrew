@@ -25,7 +25,7 @@ const Signup = () => {
   const signup = () => {
     const { username, email, password } = user;
     if (username && email && password) {
-      axios.post("http://localhost:9002/signup", user).then((res) => {
+      axios.post("https://codebrew.up.railway.app/signup", user).then((res) => {
         alert(res.data.message);
         navigator("/login");
       });
