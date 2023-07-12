@@ -9,7 +9,7 @@ app.use(cors());
 
 mongoose
   .connect(
-    "mongodb+srv://adi:aditya@cluster0.luvw69t.mongodb.net/loginsignup",
+    "mongodb+srv://adi:aditya@cluster0.av55cvu.mongodb.net/codebrewdata",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
