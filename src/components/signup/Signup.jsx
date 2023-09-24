@@ -25,10 +25,22 @@ const Signup = () => {
   const signup = () => {
     const { username, email, password } = user;
     if (username && email && password) {
-      axios.post("https://codebrew.up.railway.app/signup", user).then((res) => {
-        alert(res.data.message);
-        navigator("/login");
-      });
+      // axios.post("http://localhost:9002/signup", user).then((res) => {
+      //   alert(res.data.message);
+      //   navigator("/login");
+      // });
+      axios.all([
+        axios.post("http://localhost:9002/signup", user).then((res) => {
+          alert(res.data.message);
+          navigator("/login");
+        }),
+        axios
+          .post("https://codebrew.up.railway.app/signup", user)
+          .then((res) => {
+            alert(res.data.message);
+            navigator("/login");
+          }),
+      ]);
     } else {
       alert("Invalid input");
     }

@@ -22,11 +22,21 @@ function Login({ setLoginUser }) {
   };
 
   const login = () => {
-    axios.post("https://codebrew.up.railway.app/login", user).then((res) => {
-      // alert(res.data.message);
-      setLoginUser(res.data.user);
-      navigator("/");
-    });
+    // axios.post("https://codebrew.up.railway.app/login", user).then((res) => {
+    //   // alert(res.data.message);
+    //   setLoginUser(res.data.user);
+    //   navigator("/");
+    // });
+    axios.all([
+      axios.post("http://localhost:9002/login", user).then((res) => {
+        setLoginUser(res.data.user);
+        navigator("/");
+      }),
+      axios.post("https://codebrew.up.railway.app/login", user).then((res) => {
+        setLoginUser(res.data.user);
+        navigator("/");
+      }),
+    ]);
   };
 
   return (
