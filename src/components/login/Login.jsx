@@ -4,6 +4,7 @@ import styles from "./styles.module.css";
 import logo from "../../images/logo_1.png";
 import loginimg from "../../images/login.jpg";
 import axios from "axios";
+import { server } from "../../App";
 
 function Login({ setLoginUser }) {
   const [user, setUser] = useState({
@@ -22,21 +23,10 @@ function Login({ setLoginUser }) {
   };
 
   const login = () => {
-    // axios.post("https://codebrew.up.railway.app/login", user).then((res) => {
-    //   // alert(res.data.message);
-    //   setLoginUser(res.data.user);
-    //   navigator("/");
-    // });
-    axios.all([
-      axios.post("http://localhost:9002/login", user).then((res) => {
-        setLoginUser(res.data.user);
-        navigator("/");
-      }),
-      axios.post("https://codebrew.up.railway.app/login", user).then((res) => {
-        setLoginUser(res.data.user);
-        navigator("/");
-      }),
-    ]);
+    axios.post(`${server}/login`, user).then((res) => {
+      setLoginUser(res.data.user);
+      navigator("/");
+    });
   };
 
   return (

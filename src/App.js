@@ -8,6 +8,8 @@ import DataProvider from "./context/DataProvider";
 import Loader from "./components/Loader";
 import loadinghome from "./animations/loadinghome.json";
 
+export const server = "http://localhost:4000";
+
 function App() {
   const [loading, setLoading] = useState(true);
 
